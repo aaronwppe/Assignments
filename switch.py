@@ -48,6 +48,7 @@ class Switch:
 # while not switch.exit_is_selected:
 #     option = input("Perform: ")
 #     print(switch.run(option))
+#     print(switch.break_line)
 class Switch2:
     def __init__(self, default_string="Invalid Input!", break_line=("=" * 20)):
         self.count = 0
@@ -69,13 +70,13 @@ class Switch2:
     def options(self):
         ret = str()
         for i in self.options_list:
-            ret += str(i)
+            ret += str(i) + '\n'
 
         return ret
 
     def on_exit(self):
         self.exit_is_selected = True
-        return 'Bye!\n' + self.break_line
+        return 'Bye!'
 
     def add_exit_case(self):
         self.add_case('Exit', lambda: self.on_exit())
