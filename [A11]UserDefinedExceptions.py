@@ -1,13 +1,13 @@
 class InvalidProductCode(Exception):
-    pass
+    message = 'Product code provided does not exist!'
 
 
 class NegativeProductQuantity(Exception):
-    pass
+    message = 'Quantity cannot be negative!'
 
 
 class MaxProductQuantityExceeded(Exception):
-    pass
+    message = 'Maximum product quantity exceeded!'
 
 
 class Product:
@@ -31,16 +31,22 @@ class Product:
             raise MaxProductQuantityExceeded
 
 
-try:
-    p = Product(input("code: "), 5)
-except InvalidProductCode:
-    print('e1')
-    exit(1)
-except NegativeProductQuantity:
-    print('e2')
-    exit(1)
-except MaxProductQuantityExceeded:
-    print('e3')
-    exit(1)
+flag = 'y'
+while flag == 'y':
+    try:
+        p = Product(input("Code: "), int(input("Quantity: ")))
+        print('Product is valid.')
+    except (InvalidProductCode, NegativeProductQuantity, MaxProductQuantityExceeded) as e:
+        print(f'ERROR: {e.message}')
+    except ValueError:
+        print(f"ERROR: Quantity value provided must be of type 'int'!")
 
-print(p)
+    while 1:
+        flag = input('Continue Insertion (y/n) ? ')
+        if flag != 'y' and flag != 'n':
+            print('Invalid input! Try Again...')
+        else:
+            break
+
+
+print("Bye!")
