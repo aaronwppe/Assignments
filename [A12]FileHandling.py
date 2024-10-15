@@ -75,7 +75,6 @@ class Inventory:
 def insert():
     inventory = Inventory()
     flag = 'y'
-
     while flag == 'y':
         try:
             print('Product,')
@@ -88,29 +87,36 @@ def insert():
         except ValueError:
             print("ERROR: Value provided must be of type 'int'! Try again...")
 
-        flag = input('Continue Insertion (y/n) ? ')
-        if flag != 'y' and flag != 'n':
-            print('Invalid input! Try Again...')
+        while 1:
+            flag = input('Continue Insertion (y/n) ? ')
+            if flag != 'y' and flag != 'n':
+                print('Invalid input! Try Again...')
+            else:
+                break
 
     inventory.write_to_file()
     return 'Exited insertion mode.'
 
 
 def read():
-    inventory = Inventory().read_from_file()
-
     ret = str()
-    for product in inventory:
-        ret += str(product) + '\n'
+
+    try:
+        inventory = Inventory().read_from_file()
+        for product in inventory:
+            ret += str(product) + '\n'
+    except FileNotFoundError:
+        pass
 
     if ret == '':
-        return 'No product data available!'
+        ret = 'No product data available!'
+
     return ret
 
 
 switch = Switch2()
-switch.add_case('Insert', lambda: insert())
-switch.add_case('Read', lambda: read())
+switch.add_case('Insert', insert)
+switch.add_case('Read', read)
 switch.add_exit_case()
 
 print("Options:")
