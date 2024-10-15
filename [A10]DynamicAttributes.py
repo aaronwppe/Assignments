@@ -11,11 +11,26 @@ def set_data(self, reg_no, name):
 
 
 def get_data(self):
-    if hasattr(self, "reg_no"):
-        return f"Reg No: {self.reg_no}"
+    if not (hasattr(self, "reg_no") or hasattr(self, "name")):
+        return 'No data!'
 
-    if hasattr(self, "name"):
-        return 'type.me'
+    return f"Reg No: {self.reg_no}\nName: {self.name}"
 
 
-types.MethodType()
+print('Student Data')
+while 1:
+    try:
+        reg_no = int(input('Reg No: '))
+        break
+    except ValueError:
+        print("ERROR: Values provided must be of type 'int'! Try again...")
+
+name = input('Name: ')
+
+student = Student()
+student.setData = types.MethodType(set_data, student)
+student.getData = types.MethodType(get_data, student)
+
+student.setData(reg_no, name)
+print('Data Provided,')
+print(student.getData())
