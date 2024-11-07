@@ -53,7 +53,7 @@ class Inventory:
     def read_from_file(cls):
         self = cls()
         file_name = self.get_file_name()
-
+        
         with open(file_name, 'r') as file:
             for line in file:
                 line_list = line.split(',')
