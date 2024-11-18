@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Data</title>
+    </head>
+    
+    <body>
+        <h1>Mark Sheets</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Percentage</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for s in students %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.percentage }}</td>
+                    <td>{{ s.grade }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </body>
+</html>
